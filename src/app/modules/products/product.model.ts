@@ -5,6 +5,7 @@ import {
   TProduct,
   TVariant,
 } from './product.interface';
+// import { ObjectId } from 'mongoose';
 
 const variantSchema = new Schema<TVariant>(
   {
@@ -32,6 +33,19 @@ const productSchema = new Schema({
   inventory: { type: inventorySchema, required: true },
 });
 
+// // Static
+// productSchema.statics.isProductExists = async function (
+//   id: ObjectId,
+// ): Promise<TProduct | null> {
+//   return this.findById(id).exec();
+// };
+
+// productSchema.statics.isOrderExists = async function (
+//   id: ObjectId,
+// ): Promise<TProduct | null> {
+//   // Assuming the product ID is used to check order existence
+//   return this.findById(id).exec();
+// };
 const Product = model<TProduct, ProductModel>('Product', productSchema);
 
 export default Product;

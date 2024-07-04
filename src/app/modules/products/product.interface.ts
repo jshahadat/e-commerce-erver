@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongoose';
 import { Model } from 'mongoose';
 
 export type TVariant = {
@@ -22,7 +23,7 @@ export type TProduct = {
 
 export type ProductModel = Model<TProduct> & {
   // eslint-disable-next-line no-unused-vars
-  isProductExists(id: string): Promise<TProduct | null>;
+  isProductExists(id: ObjectId): Promise<TProduct | null>;
   // eslint-disable-next-line no-unused-vars
-  isOrderExists(id: string): Promise<TProduct | null>;
+  isOrderExists(id: ObjectId): Promise<TProduct | null>;
 };
