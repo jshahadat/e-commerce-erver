@@ -28,12 +28,6 @@ const deleteSingleProductFromDB = async (productId: string) => {
   return await Product.findByIdAndDelete({ _id: productId });
 };
 
-// const searchProductsFromDB = async (searchTerm: string) => {
-//      return await ProductModel.find({
-//        name: { $regex: searchTerm, $options: 'i' },
-//      });
-//    };
-
 export const ProductServices = {
   createProductIndtoDB,
   getAllProductFromDB,
