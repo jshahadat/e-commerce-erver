@@ -24,14 +24,14 @@ const updateProductIntoDB = async (
   });
 };
 
+const deleteSingleProductFromDB = async (productId: string) => {
+  return await Product.findByIdAndDelete({ _id: productId });
+};
+
 // const searchProductsFromDB = async (searchTerm: string) => {
 //      return await ProductModel.find({
 //        name: { $regex: searchTerm, $options: 'i' },
 //      });
-//    };
-
-//    const deleteProductFromDB = async (productId: string) => {
-//      return await ProductModel.findByIdAndDelete({ _id: productId });
 //    };
 
 export const ProductServices = {
@@ -39,4 +39,5 @@ export const ProductServices = {
   getAllProductFromDB,
   getSingleProductByIdFromDB,
   updateProductIntoDB,
+  deleteSingleProductFromDB,
 };

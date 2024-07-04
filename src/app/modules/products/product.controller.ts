@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { productValidationSchema } from './product.validation';
 import { ProductServices } from './product.service';
 import { TProduct } from './product.interface';
-import { productSchema } from './product.schema';
 
 const createProduct = async (req: Request, res: Response) => {
   try {
@@ -62,7 +61,9 @@ const getSingleProduct = async (req: Request, res: Response) => {
 
 const updateProduct = async (req: Request, res: Response) => {
   try {
-    const validationResult = productSchema.partial().safeParse(req.body);
+    const validationResult = productValidationSchema
+      .partial()
+      .safeParse(req.body);
     if (!validationResult.success) {
       return res.status(400).json(validationResult.error);
     }
@@ -74,7 +75,7 @@ const updateProduct = async (req: Request, res: Response) => {
     );
     res.status(200).json({
       success: true,
-      message: 'Products fetched successfully!',
+      message: '"Product updated successfully!',
       data: result,
     });
   } catch (err: any) {
@@ -86,24 +87,29 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 };
 
-//    const deleteProduct = async (req: Request, res: Response) => {
-//      try {
-//        const product = await ProductServices.deleteProductFromDB(
-//          req.params.productId,
-//        );
-//        if (!product) {
-//          SUCCESS(res, 'Product not found');
-//        } else {
-//          SUCCESS(res, 'Product Deleted successfully');
-//        }
-//      } catch (error: any) {
-//        ERROR(res, 'Failed to update Product', [error.message], 500);
-//      }
-//    };
+const deleteSingleProduct = async (req: Request, res: Response) => {
+  try {
+    const result = await ProductServices.deleteSingleProductFromDB(
+      req.params.productId,
+    );
+    res.status(200).json({
+      success: true,
+      message: 'Product deleted successfully!',
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || 'somthing went wrong',
+      error: err,
+    });
+  }
+};
 
 export const ProductController = {
   createProduct,
   getAllProducts,
   getSingleProduct,
   updateProduct,
+  deleteSingleProduct,
 };
