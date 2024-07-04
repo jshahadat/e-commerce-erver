@@ -1,6 +1,5 @@
 import { TProduct } from './product.interface';
 import Product from './product.model';
-import { ObjectId } from 'mongoose';
 
 const createProductIndtoDB = async (productData: TProduct) => {
   const result = await Product.create(productData);
@@ -12,29 +11,32 @@ const getAllProductFromDB = async () => {
   return result;
 };
 
-// const getSingleProduct = async (productId:) => {
-//   if (!(await Product.isProductExists(productId))) {
-//     return new Error('User not found!');
-//   }
-//   const result = await Product.findOne({ productId });
-//   return result;
-// };
-
-const getSingleProductById = async (id: ObjectId) => {
-  try {
-    const product = await Product.findById(id);
-    return product;
-  } catch (err) {
-    throw new Error('Error fetching product');
-  }
+const getSingleProductByIdFromDB = async (productId: string) => {
+  return await Product.findById({ _id: productId });
 };
 
-export default {
-  getSingleProductById,
+const updateProductIntoDB = async (
+  productId: string,
+  productData: TProduct,
+) => {
+  return await Product.findByIdAndUpdate(productId, productData, {
+    new: true,
+  });
 };
+
+// const searchProductsFromDB = async (searchTerm: string) => {
+//      return await ProductModel.find({
+//        name: { $regex: searchTerm, $options: 'i' },
+//      });
+//    };
+
+//    const deleteProductFromDB = async (productId: string) => {
+//      return await ProductModel.findByIdAndDelete({ _id: productId });
+//    };
 
 export const ProductServices = {
   createProductIndtoDB,
   getAllProductFromDB,
-  getSingleProductById,
+  getSingleProductByIdFromDB,
+  updateProductIntoDB,
 };
