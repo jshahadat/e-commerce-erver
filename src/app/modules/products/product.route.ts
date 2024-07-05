@@ -13,4 +13,6 @@ router.put('/:productId', ProductController.updateProduct);
 
 router.delete('/:productId', ProductController.deleteSingleProduct);
 
+router.get('/', ProductController.getAllSearchProducts);
+
 export const ProductRoutes = router;

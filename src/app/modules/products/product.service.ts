@@ -28,10 +28,28 @@ const deleteSingleProductFromDB = async (productId: string) => {
   return await Product.findByIdAndDelete({ _id: productId });
 };
 
+const getSearchProductsFromDB = async (query: Record<string, unknown>) => {
+  let searchQuery = Product.find();
+
+  if (query?.searchTerm) {
+    const searchTerm = query.searchTerm;
+    searchQuery = searchQuery.find({
+      $or: searchFields.map((field: any) => ({
+        [field]: { $regex: searchTerm, $options: 'i' },
+      })),
+    });
+  }
+
+  const result = await searchQuery;
+
+  return result;
+};
+
 export const ProductServices = {
   createProductIndtoDB,
   getAllProductFromDB,
   getSingleProductByIdFromDB,
   updateProductIntoDB,
   deleteSingleProductFromDB,
+  getSearchProductsFromDB,
 };
