@@ -1,7 +1,7 @@
 # Clone Repository
 
 ```
-git clone https://github.com/jshahadat/user-update.git
+git clone https://github.com/jshahadat/e-commerce-erver.git
 
 ```
 
@@ -22,7 +22,7 @@ npm run start:dev
 // List of product objects. fullName, age, email, address .
 
 ```
- POST:
+ POST:https://e-commerce-server-plum.vercel.app/api/products
 
 ```
 
@@ -45,13 +45,13 @@ npm run start:dev
 // List of product objects. Each object should only contain name, description, price, category, variants .
 
 ```
- GET:
+ GET:https://e-commerce-server-plum.vercel.app/api/products
 ```
 
 ## 3. Retrieve a specific product by ID
 
 ```
- GET:
+ GET:https://e-commerce-server-plum.vercel.app/api/products/:productId
 
 ```
 
@@ -69,44 +69,17 @@ npm run start:dev
 }
 ```
 
-## 4. Update user
+## 4. Update product
 
 ```
- PUT :
+ PUT :https://e-commerce-server-plum.vercel.app/api/products/:productId
 
 ```
 
-```response
-{
-    "success": true,
-    "message": "User updated successfully!",
-    "data": {
-        "userId": "number",
-        "username": "string",
-        "fullName": {
-            "firstName": "string",
-            "lastName": "string"
-        },
-        "age": "number",
-        "email": "string",
-        "isActive": "boolean",
-        "hobbies": [
-            "string",
-            "string"
-        ],
-        "address": {
-            "street": "string",
-            "city": "string",
-            "country": "string"
-        }
-    }
-}
-```
-
-## 5. Delete user
+## 5. Delete product
 
 ```
- DELETE  :
+ DELETE  :https://e-commerce-server-plum.vercel.app/api/products/:productId
 
 ```
 
@@ -117,6 +90,57 @@ npm run start:dev
 	"data" : null
 }
 ```
+
+## 6. Search New product
+
+{
+"success": true,
+"message": "Products matching search term 'iphone' fetched successfully!",
+"data": [
+{
+"name": "iPhone 13 Pro",
+"description": "The latest flagship iPhone model with advanced camera features.",
+"price": 999,
+"category": "Smartphones",
+"tags": ["iPhone", "Apple", "Mobile"],
+"variants": [
+{
+"type": "Color",
+"value": "Graphite"
+},
+{
+"type": "Storage",
+"value": "256GB"
+}
+],
+"inventory": {
+"quantity": 50,
+"inStock": true
+}
+},
+{
+"name": "iPhone SE",
+"description": "Compact and affordable iPhone model with powerful performance.",
+"price": 399,
+"category": "Smartphones",
+"tags": ["iPhone", "Apple", "Mobile"],
+"variants": [
+{
+"type": "Color",
+"value": "White"
+},
+{
+"type": "Storage",
+"value": "128GB"
+}
+],
+"inventory": {
+"quantity": 20,
+"inStock": true
+}
+}
+]
+}
 
 ## 6. Place New Order
 
@@ -142,7 +166,7 @@ npm run start:dev
 ## 7. Retrieve all orders for a specific user
 
 ```
- GET   :
+ GET   ::https://e-commerce-server-plum.vercel.app/api/orders?email=level2@programming-hero.com
 
 ```
 

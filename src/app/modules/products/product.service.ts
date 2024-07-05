@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TProduct } from './product.interface';
 import Product from './product.model';
 
@@ -34,7 +35,7 @@ const getSearchProductsFromDB = async (query: Record<string, unknown>) => {
   if (query?.searchTerm) {
     const searchTerm = query.searchTerm;
     searchQuery = searchQuery.find({
-      $or: searchFields.map((field: any) => ({
+      $or: ['name', 'description'].map((field: any) => ({
         [field]: { $regex: searchTerm, $options: 'i' },
       })),
     });
