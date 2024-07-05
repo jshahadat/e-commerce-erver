@@ -5,8 +5,8 @@ const orderValidationSchema = z.object({
   email: z
     .string()
     .email('Invalid email format')
-    .nonempty('User email is required'),
-  productId: z.string().nonempty('Product Id is required'),
+    .min(1, { message: 'User email is required' }),
+  productId: z.string().min(1, { message: 'Product Id is required' }),
   price: z.number().positive('Price must be a positive number'),
   quantity: z.number().positive('Quantity must be a positive number'),
 });
